@@ -7,12 +7,15 @@
   "scripts": {
     "build": "yarn run build",
     "test": "yarn run test",
+    "sampledapp": "yarn workspace @face/sampledapp",
+    "iframe": "yarn workspace @face/iframe",
     "bootstrap": "yarn install && lerna exec yarn install",
     "fmt": "prettier --write '**/*.{js,jsx,ts,tsx}'",
     "check": "prettier --check '**/*.{js,jsx,ts,tsx}'",
     "lint": "eslint --fix '**/*.{js,jsx,ts,tsx}'"
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "8.22.0",
