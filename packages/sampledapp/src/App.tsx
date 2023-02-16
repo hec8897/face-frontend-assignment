@@ -9,8 +9,6 @@ function App() {
   const [create, setCreate] = useState<boolean>(false);
 
   async function clickCreateWallet() {
-    // const address = await sdk.createWallet();
-    // console.log(address);
     setCreate(true);
   }
 
