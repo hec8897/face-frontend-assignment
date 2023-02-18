@@ -1,10 +1,14 @@
 import React from 'react';
+import Create from './component/CreateWallet';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div style={{ fontSize: '4rem', background: '#f1f1f1', height: 400, width: 800 }}>
-      [IFrame] 과제를 구현해 주세요
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/new" element={<Create />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
