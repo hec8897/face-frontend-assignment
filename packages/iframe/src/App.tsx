@@ -1,5 +1,5 @@
 import React from 'react';
-import Create from './component/Create';
+import Create from './component/CreateWallet';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {

@@ -1,6 +1,10 @@
 // import { Iframe } from './iframe';
 import { Wallet } from './wallet';
 
+interface IWallet {
+  address?: string;
+}
+
 export class FaceSDK {
   // private iframe: Iframe;
   private wallet: Wallet;
@@ -15,7 +19,7 @@ export class FaceSDK {
   // todo: iframe을 활용하여 로그인 페이지를 띄우고 지갑을 생성하세요.
   // iframe안에서 private key를 랜덤으로 생성하고 iframe의 local storage에 저장하고 private key의 public address를 SDK에 전달합니다.
   // 만약 이미 local storage에 private key가 존재한다면 private key를 생성하지 않고 private key의 public address를 SDK에 전달합니다.
-  async createWallet(): Promise<string> {
+  async createWallet(): Promise<IWallet> {
     const walletStorage = await window.localStorage.getItem('wallet');
     if (walletStorage) {
       return JSON.parse(walletStorage);

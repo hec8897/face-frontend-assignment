@@ -1,25 +1,19 @@
 import React, { useEffect } from 'react';
 import Portal from './modal';
+import useIframe from '../hooks/useIframe';
 import { ButtonStyle, SubTitleStyle, TextStyle } from '../styled';
 import Footer from './Footer';
 
 const CreateWalletModal = ({ close }: { close: () => void }) => {
-  const isIFrame = (input: HTMLElement | null): input is HTMLIFrameElement =>
-    input !== null && input.tagName === 'IFRAME';
+  const { postMessage } = useIframe();
 
-  const onClick = async () => {
-    const frame = document.getElementById('frame');
-    if (isIFrame(frame) && frame.contentWindow) {
-      await frame.contentWindow.postMessage({ key: 'new' }, '*');
-    }
-  };
   useEffect(() => {
     window.addEventListener('message', (e) => {
-      if (e.data.functionName === 'sussess') {
+      if (e.data.key === 'sussess') {
         close();
       }
     });
-  }, []);
+  });
 
   return (
     <Portal>
@@ -40,7 +34,7 @@ const CreateWalletModal = ({ close }: { close: () => void }) => {
           src="http://localhost:3001/new"
         />
       </div>
-      <ButtonStyle onClick={onClick}>Close</ButtonStyle>
+      <ButtonStyle onClick={() => postMessage({ key: 'new' })}>Close</ButtonStyle>
       <Footer />
     </Portal>
   );

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { FaceSDK } from '@face/sdk';
+import useSdk from '../hooks/useSdk';
+import useIframe from '../hooks/useIfame';
 
 interface IWallet {
   address?: string;
 }
 
 function Create() {
-  const [sdk] = useState(new FaceSDK());
+  const { createWallet, setStorage } = useSdk();
+  const { postMessage } = useIframe();
   const [wallet, setWallet] = useState<IWallet>({});
 
   const newWallet = async () => {
-    const wallet: any = await sdk.createWallet();
+    const wallet: IWallet = await createWallet();
     setWallet(wallet);
   };
 
@@ -18,8 +20,8 @@ function Create() {
     if (wallet) {
       window.addEventListener('message', (e) => {
         if (e.data.key === 'new') {
-          sdk.setStorage(wallet);
-          window.parent.postMessage({ functionName: 'sussess' }, '*');
+          setStorage(wallet);
+          postMessage({ key: 'sussess' });
         }
       });
     }
